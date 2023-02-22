@@ -44,7 +44,7 @@ const LoginLayout = ({ isLogin }) => {
               {isLoginStatus ? (
                 <Login setIsLogin={setLoginState} />
               ) : (
-                <SignUp />
+                <SignUp setIsLogin={setLoginState} />
               )}
             </Content>
           </Layout>

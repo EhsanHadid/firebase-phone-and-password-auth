@@ -22,7 +22,7 @@ export default function Login({ setIsLogin }) {
         headStyle={{ alignItems: "center" }}
         className="card"
         hoverable
-        style={{ minWidth: 330, maxWidth: 330 }}
+        style={{ minWidth: 355, maxWidth: 355 }}
       >
         <Title level={5} style={{ textAlign: "center", fontFamily: "cursive" }}>
           Sign in to Fire App
@@ -47,9 +47,3 @@ export default function Login({ setIsLogin }) {
     </div>
   );
 }
-
-// <Divider style={{ marginTop: 40 }}>Or Use Your Email </Divider>
-// <div style={{ padding: "0px 20px" }}>
-//   {/* <PhoneVerification /> */}
-//   login with email
-// </div>
