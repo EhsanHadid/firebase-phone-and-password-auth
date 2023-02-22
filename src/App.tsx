@@ -10,14 +10,17 @@ function App() {
   return (
     <div className="container">
       <Routes>
-        <Route element={<ProtectedRoute isAllowed={!user} redirectPath="/" />}>
+        <Route
+          element={
+            <ProtectedRoute
+              isAllowed={!user || user.email == null}
+              redirectPath="/"
+            />
+          }
+        >
           <Route path="login" element={<LoginPage isLogin={true} />} />
           <Route path="signup" element={<LoginPage isLogin={false} />} />
         </Route>
-
-        {/* <Route
-          element={<ProtectedRoute isAllowed={!user} redirectPath="/" />}
-        ></Route> */}
 
         <Route
           element={<ProtectedRoute isAllowed={!!user} redirectPath="/login" />}

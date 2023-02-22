@@ -6,6 +6,8 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import PhoneVerification from "./phone-verification";
 import CodeVerification from "./code-verification";
+import { Register } from "./register";
+import { useUser } from "../auth/auth-provider";
 // import PhoneVerification from './phone-verification';
 
 const { Title } = Typography;
@@ -18,6 +20,7 @@ const enum SignUpState {
 
 export default function SignUp({ setIsLogin }) {
   const [state, setState] = useState<SignUpState>(SignUpState.ENTER_PHONE);
+  const user = useUser();
 
   return (
     <div
@@ -37,14 +40,19 @@ export default function SignUp({ setIsLogin }) {
         <Title level={5} style={{ textAlign: "center", fontFamily: "cursive" }}>
           Sign Up to Fire App
         </Title>
-        {state == SignUpState.ENTER_PHONE ? (
-          <PhoneVerification
-            codeSent={() => setState(SignUpState.PHONE_VERIFICATION)}
-          />
+
+        {!user ? (
+          state == SignUpState.ENTER_PHONE ? (
+            <PhoneVerification
+              codeSent={() => setState(SignUpState.PHONE_VERIFICATION)}
+            />
+          ) : (
+            <CodeVerification
+              codeVerified={() => setState(SignUpState.REGISTER_INFO)}
+            />
+          )
         ) : (
-          <CodeVerification
-            codeVerified={() => setState(SignUpState.REGISTER_INFO)}
-          />
+          <Register registered={() => setIsLogin(true)} />
         )}
       </Card>
       <Card
