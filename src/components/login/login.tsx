@@ -1,9 +1,5 @@
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
-import { Button, Card, Divider, Typography, Row, Col } from "antd";
-import { GoogleSquareFilled } from "@ant-design/icons";
+import { Card, Typography } from "antd";
 import PasswordVerification from "./password-verification";
-import { Navigate, useLocation } from "react-router-dom";
-import { useState } from "react";
 // import PhoneVerification from './phone-verification';
 
 const { Title } = Typography;
