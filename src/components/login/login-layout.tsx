@@ -7,47 +7,34 @@ const { Content } = Layout;
 const { Title, Paragraph } = Typography;
 
 const LoginLayout = ({ isLogin }) => {
-  const [isLoginStatus, setLoginState] = useState<boolean>(isLogin);
+  const [isLoginStatus, setLoginState] = useState(isLogin);
 
   return (
     <Content>
-      <Row style={{ height: "100%", alignItems: "center", padding: "14px" }}>
-        <Col xs={24} xl={12}>
-          <Row>
-            <Col span={24}>
-              <Title
-                style={{
-                  textAlign: "center",
-                  fontFamily: "cursive",
-                }}
-                level={2}
-              >
-                Fire App
-              </Title>
-            </Col>
-            <Col span={24}>
-              <Paragraph
-                style={{
-                  textAlign: "center",
-                  fontSize: "1rem",
-                  fontFamily: "cursive",
-                }}
-              >
-                Welcome to FireApp application
-              </Paragraph>
-            </Col>
-          </Row>
+      <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
+        <Col xs={24} md={12}>
+          <Title
+            level={2}
+            style={{ textAlign: "center", fontFamily: "cursive" }}
+          >
+            Fire App
+          </Title>
+          <Paragraph
+            style={{
+              textAlign: "center",
+              fontSize: "1rem",
+              fontFamily: "cursive",
+            }}
+          >
+            Welcome to FireApp application
+          </Paragraph>
         </Col>
-        <Col style={{ backgroundColor: "green" }} xs={24} xl={12}>
-          <Layout style={{ height: "100%" }}>
-            <Content>
-              {isLoginStatus ? (
-                <Login setIsLogin={setLoginState} />
-              ) : (
-                <SignUp setIsLogin={setLoginState} />
-              )}
-            </Content>
-          </Layout>
+        <Col xs={24} md={12} style={{ backgroundColor: "green" }}>
+          {isLoginStatus ? (
+            <Login setIsLogin={setLoginState} />
+          ) : (
+            <SignUp setIsLogin={setLoginState} />
+          )}
         </Col>
       </Row>
     </Content>

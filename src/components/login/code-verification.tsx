@@ -12,8 +12,7 @@ declare global {
 }
 
 export default function CodeVerification({ codeVerified }) {
-  const verifyCode = (event) => {
-    const code = event["code"];
+  const verifyCode = ({ code }) => {
     const credential = PhoneAuthProvider.credential(
       window.confirmationResult.verificationId,
       code
