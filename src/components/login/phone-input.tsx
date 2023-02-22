@@ -40,7 +40,7 @@ export const PhoneNumberInput = ({
         />
       </Col>
       <Col>
-        <Text style={{ width: "100%", height: 30, padding: 10 }} type="danger">
+        <Text style={{ width: "100%" }} type="danger">
           {phone
             ? isValidPhoneNumber(phone)
               ? undefined

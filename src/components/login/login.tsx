@@ -2,11 +2,13 @@ import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { Button, Card, Divider, Typography, Row, Col } from "antd";
 import { GoogleSquareFilled } from "@ant-design/icons";
 import PasswordVerification from "./password-verification";
+import { Navigate, useLocation } from "react-router-dom";
+import { useState } from "react";
 // import PhoneVerification from './phone-verification';
 
 const { Title } = Typography;
 
-export default function Login() {
+export default function Login({ setIsLogin }) {
   return (
     <div
       style={{
@@ -38,7 +40,8 @@ export default function Login() {
         }}
       >
         <p>
-          New to Fire App? <a>Create an Account</a>
+          New to Fire App?{" "}
+          <a onClick={() => setIsLogin(false)}>Create an Account</a>
         </p>
       </Card>
     </div>

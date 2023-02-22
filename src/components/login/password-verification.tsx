@@ -11,18 +11,17 @@ export default function PasswordVerification() {
   const [isPhoneEmpty, setIsPhoneEmpty] = useState<boolean>(true);
 
   const signIn = (values: any) => {
-    const phone = values["phone"];
     const password = values["password"];
-    const email = convertPhoneToEmail(phone);
-    console.log(email);
-    // signInWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     console.log(userCredential.user);
-    //   })
-    //   .catch((error) => {
-    //     console.log("not found", error.message);
-    //   });
+    const email = convertPhoneToEmail(phoneNumber);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        console.log(userCredential.user);
+      })
+      .catch((error) => {
+        console.log("not found", error.message);
+      });
   };
 
   return (

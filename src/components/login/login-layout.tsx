@@ -1,4 +1,5 @@
 import { Layout, Col, Row, Typography } from "antd";
+import { useState } from "react";
 import Login from "./login";
 import SignUp from "./signup";
 const { Content } = Layout;
@@ -6,6 +7,8 @@ const { Content } = Layout;
 const { Title, Paragraph } = Typography;
 
 const LoginLayout = ({ isLogin }) => {
+  const [isLoginStatus, setLoginState] = useState<boolean>(isLogin);
+
   return (
     <Content>
       <Row style={{ height: "100%", alignItems: "center", padding: "14px" }}>
@@ -37,7 +40,13 @@ const LoginLayout = ({ isLogin }) => {
         </Col>
         <Col style={{ backgroundColor: "green" }} xs={24} xl={12}>
           <Layout style={{ height: "100%" }}>
-            <Content>{isLogin ? <Login /> : <SignUp />}</Content>
+            <Content>
+              {isLoginStatus ? (
+                <Login setIsLogin={setLoginState} />
+              ) : (
+                <SignUp />
+              )}
+            </Content>
           </Layout>
         </Col>
       </Row>
