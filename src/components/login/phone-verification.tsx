@@ -29,6 +29,7 @@ export default function PhoneVerification({ codeSent }) {
         codeSent(confirmationResult.verificationId);
       } else {
         // TODO : Show there is an account and try login instead
+        console.log("account exist");
       }
     } catch (error) {
       console.log(error);

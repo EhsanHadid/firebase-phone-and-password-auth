@@ -1,36 +1,27 @@
-import React from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import { useUser } from "../auth/auth-provider";
 import { convertPhoneToEmail } from "../../helpers/phone-util";
-import { useNavigate } from "react-router-dom";
 import {
   EmailAuthProvider,
   linkWithCredential,
   signOut,
-  updateCurrentUser,
   updateProfile,
 } from "@firebase/auth";
 import { auth } from "../../firebase";
 
 export const Register = ({ registered }) => {
   const user = useUser();
-  const navigate = useNavigate();
 
-  const onFinish = (values: any) => {
-    const fullname = values["full_name"];
-    const password = values["password"];
+  const registerFormHandler = async ({ fullname, password }) => {
     if (user && user.phoneNumber) {
       const email = convertPhoneToEmail(user.phoneNumber);
-      console.log(email);
       const credential = EmailAuthProvider.credential(email, password);
-      linkWithCredential(user, credential).then((userCred) => {
-        updateProfile(userCred.user, {
-          displayName: fullname,
-        }).then(() => {
-          signOut(auth);
-          registered();
-        });
+      const userCred = await linkWithCredential(user, credential);
+      await updateProfile(userCred.user, {
+        displayName: fullname,
       });
+      await signOut(auth);
+      registered();
     }
   };
 
@@ -45,13 +36,13 @@ export const Register = ({ registered }) => {
       wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
       initialValues={{ remember: true }}
-      onFinish={onFinish}
+      onFinish={registerFormHandler}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Form.Item
         label="FullName"
-        name="full_name"
+        name="fullname"
         rules={[{ required: true, message: "Please input your full name!" }]}
       >
         <Input />
