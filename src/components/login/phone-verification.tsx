@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Button, Form } from "antd";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import {
+  fetchSignInMethodsForEmail,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "firebase/auth";
 import { auth } from "../../firebase";
 import { PhoneNumberInput } from "./phone-input";
+import { convertPhoneToEmail } from "../../helpers/phone-util";
 
 export default function PhoneVerification({ codeSent }) {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -13,12 +18,18 @@ export default function PhoneVerification({ codeSent }) {
     setLoading(true);
 
     try {
-      const confirmationResult = await signInWithPhoneNumber(
-        auth,
-        phoneNumber,
-        new RecaptchaVerifier("recaptcha-container", {}, auth)
-      );
-      codeSent(confirmationResult.verificationId);
+      const email = convertPhoneToEmail(phoneNumber);
+      const providers = await fetchSignInMethodsForEmail(auth, email);
+      if (providers.length == 0) {
+        const confirmationResult = await signInWithPhoneNumber(
+          auth,
+          phoneNumber,
+          new RecaptchaVerifier("recaptcha-container", {}, auth)
+        );
+        codeSent(confirmationResult.verificationId);
+      } else {
+        // TODO : Show there is an account and try login instead
+      }
     } catch (error) {
       console.log(error);
     } finally {

@@ -31,7 +31,7 @@ export const PhoneNumberInput = ({
           }
         />
       </Col>
-      <Col>
+      {/* <Col>
         <Text style={{ width: "100%" }} type="danger">
           {!phone && !isPhoneEmpty
             ? "Phone number required"
@@ -39,7 +39,7 @@ export const PhoneNumberInput = ({
             ? undefined
             : "Invalid phone number"}
         </Text>
-      </Col>
+      </Col> */}
     </Row>
   );
 };

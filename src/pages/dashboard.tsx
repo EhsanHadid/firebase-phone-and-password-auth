@@ -23,7 +23,7 @@ const Dashboard = () => {
           zIndex: 1000,
         }}
       >
-        <h1>This is dashboard</h1>
+        <h3>This is dashboard</h3>
         <div
           style={{
             display: "flex",
