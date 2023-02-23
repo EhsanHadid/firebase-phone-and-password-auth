@@ -3,23 +3,11 @@ import { Button, Form, Input, Typography } from "antd";
 import { auth } from "../../firebase";
 const { Text } = Typography;
 
-declare global {
-  interface Window {
-    recaptchaVerifier: any;
-    recaptchaWidgetId: any;
-    confirmationResult: any;
-  }
-}
-
-export default function CodeVerification({ codeVerified }) {
+export default function CodeVerification({ verificationId }) {
   const verifyCode = ({ code }) => {
-    const credential = PhoneAuthProvider.credential(
-      window.confirmationResult.verificationId,
-      code
-    );
+    const credential = PhoneAuthProvider.credential(verificationId, code);
     signInWithCredential(auth, credential).then((userCredential) => {
       console.log(userCredential);
-      codeVerified();
     });
   };
 

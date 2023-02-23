@@ -12,14 +12,15 @@ import { useUser } from "../auth/auth-provider";
 
 const { Title } = Typography;
 
-const enum SignUpState {
-  ENTER_PHONE,
-  PHONE_VERIFICATION,
-  REGISTER_INFO,
-}
+// const enum SignUpState {
+//   ENTER_PHONE,
+//   PHONE_VERIFICATION,
+//   REGISTER_INFO,
+// }
 
 export default function SignUp({ setIsLogin }) {
-  const [state, setState] = useState<SignUpState>(SignUpState.ENTER_PHONE);
+  // const [state, setState] = useState<SignUpState>(SignUpState.ENTER_PHONE);
+  const [verificationId, setVerificationId] = useState();
   const user = useUser();
 
   return (
@@ -42,19 +43,16 @@ export default function SignUp({ setIsLogin }) {
         </Title>
 
         {!user ? (
-          state == SignUpState.ENTER_PHONE ? (
-            <PhoneVerification
-              codeSent={() => setState(SignUpState.PHONE_VERIFICATION)}
-            />
+          verificationId == null ? (
+            <PhoneVerification codeSent={setVerificationId} />
           ) : (
-            <CodeVerification
-              codeVerified={() => setState(SignUpState.REGISTER_INFO)}
-            />
+            <CodeVerification verificationId={verificationId} />
           )
         ) : (
           <Register registered={() => setIsLogin(true)} />
         )}
       </Card>
+
       <Card
         className="card"
         hoverable

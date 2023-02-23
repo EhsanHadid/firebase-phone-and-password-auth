@@ -29,7 +29,7 @@ const LoginLayout = ({ isLogin }) => {
             Welcome to FireApp application
           </Paragraph>
         </Col>
-        <Col xs={24} md={12} style={{ backgroundColor: "green" }}>
+        <Col xs={24} md={12}>
           {isLoginStatus ? (
             <Login setIsLogin={setLoginState} />
           ) : (
